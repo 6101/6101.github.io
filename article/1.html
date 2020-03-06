@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="夏目友人帐,夏目贵志,夏目玲子">
+    <meta name="description" content="本片文章讲述了折腾Chronicle静态博客生成器的经历和过程！" />
+    <!-- DNS预解析 -->
+    <link rel='dns-prefetch' href='//i.xiamuyourenzhang.cn' />
+    <link rel='dns-prefetch' href='//pstatp.com' /></head>	
+    <link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="http://199607.xyz/atom.xml" />
+    <title>“易语言”打造属于自己的静态博客生成器 - 夏目友人帐</title>
+    <link rel="icon" href="https://i.xiamuyourenzhang.cn/favicon.ico">
+    <link rel="stylesheet" href="https://i.xiamuyourenzhang.cn/fantasystyle.css">
+    <link rel="stylesheet" href="../assets/css/tp.css">	
+	<link href="../assets/css/prism.css" type="text/css" rel="stylesheet" />	
+    <script type="text/javascript" src="https://s3.pstatp.com/cdn/expire-1-M/jquery/1.11.1/jquery.min.js"></script>
+  	<link rel="stylesheet" href="https://i.xiamuyourenzhang.cn/jquery.fancybox.min.css">
+	<script src="https://i.xiamuyourenzhang.cn/jquery.fancybox.min.js"></script>
+	<script src="https://i.xiamuyourenzhang.cn/jquery.scrollLoad.min.js"></script>	
+	<style type="text/css">
+	 body {
+		counter-reset: section;
+	}
+	.content h2::before {
+		counter-increment: section;
+		content: " " counter(section) ": ";
+	}
+    </style>	
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="/" class="logo">
+          <img src="https://i.xiamuyourenzhang.cn/tx.jpeg" alt="夏目友人帐" /></a>
+        <div class="description">
+          <h1>夏目友人帐</h1>
+          <h2>《夏目友人帐》是漫画家绿川幸著作的漫画。</h2>
+          <nav>
+            <div class="bitcron_nav_container">
+              <div class="bitcron_nav">
+                <div class="mixed_site_nav_wrap site_nav_wrap">
+                  <ul class="mixed_site_nav site_nav sm sm-base">
+                    <li>
+                      <a href="http://199607.xyz/" class="nav__item">首页</a></li>
+                    <li>
+                      <a class=" nav__item" href="http://199607.xyz/article/4.html">作品</a></li>
+                    <li>
+                      <a class=" nav__item" href="http://199607.xyz/article/5.html">友人</a></li>
+                    <li>
+                      <a class=" nav__item" href="http://199607.xyz/search.html">搜索</a></li>
+                    <li>
+                      <a class=" nav__item" href="http://199607.xyz/atom.xml" target="_blank">订阅</a></li>
+                    <li>
+                      <a class=" nav__item" href="http://199607.xyz/article/3.html">关于</a></li>					  
+                  </ul>
+                  <div class="clear clear_nav_inline_end"></div>
+                </div>
+              </div>
+              <div class="clear clear_nav_end"></div>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <main>
+        <article class="content">
+          <h1>“易语言”打造属于自己的静态博客生成器</h1>
+          <div class="meta">
+            <span class="item">
+              <i class="iconfont icon-calendar"></i>
+              <time datetime="2020年03月01日 13:46:48">2020年03月01日</time></span>
+            <span class="item">
+              <i class="iconfont icon-tag"></i>
+              3.5k/12min</span>
+          </div>
+          <div class="post">
+		  <p>为什么要打造一个属于自己的静态博客呢？我从dz论坛程序一路到typecho博客程序，最喜欢的就是折腾了。什么插件啊主题模板啊，网站加载速度https证书 什么的。</p>
+<p>后面接触到了不需要使用数据库的博客程序（例如：MiniCMS、BlogMi），我发现这类程序措建和转移数据非常简单。你只需要上传就可以直接使用不需要连接数据库，文章保存为xml或json文件。这类博客还是基于php，对于服务器还是有要求。</p>
+<p>直到遇见hexo静态博客生成器，你只需要搭建nodejs环境运行即可。文章格式基于markdwon方便写作，本地渲染生成整站静态html文件格式。生成后文件可托管于（github、阿里云OSS、七牛云）等支持静态的托管平台。hexo我还是比较满意的,就是搭建环境不太友好还有大量的命令。具体看看一下我第一次用hexo发布的文章（<a target="_blank" href="http://zywl.github.io/2015/11/04/hello-world/" title="你好Hexo！我的第一篇博文，第一次写博客写的不好，望见谅！">你好Hexo！我的第一篇博文，第一次写博客写的不好，望见谅！</a>），不过多描述了。</p>
+<p>经历了hexo静态博客生成器之后，我在思考还能不能在简单点。于是乎我参考了“<a target="_blank" href="https://blog.csdn.net/u010570551/article/details/73520319" title="通过浏览器加载的方式使用strapdown.js来渲染markdown">通过浏览器加载的方式使用strapdown.js来渲染markdown</a>”使用动态js加载头部底部+strapdown.js+json2html.js+github存放+畅言评论完成了我第二个静态博客，具体可以访问（<a target="_blank" href="https://github.com/xiamuguizhi/xiamuguizhi.github.io" title="https://github.com/xiamuguizhi/xiamuguizhi.github.io">https://github.com/xiamuguizhi/xiamuguizhi.github.io</a>）查看相关原理,也可以直接看效果“<a target="_blank" href="https://xiamuguizhi.github.io/" title="demo">demo</a>”。这个静态博客全是手动创建html在发布，步骤繁多非常麻烦。不过给了我很多灵感，也有很多体悟。给我第三次打造静态博客打下了基础。</p>
+<h2 id="h2-u601Du8003"><a name="思考" class="reference-link"></a><span class="header-link octicon octicon-link"></span>思考</h2><p>第二次搭建静态博客都是手动的完成的，哪如果减去那些步骤我就写内容，搞个像hexo那样的怎么样。于是我想起了我易语言的作品“<a target="_blank" href="https://www.crsky.com/soft/65305.html" title="恋爱表白网页生成器">恋爱表白网页生成器</a>”+“<a target="_blank" href="https://dl.pconline.com.cn/download/829342.html" title="联系人查询添加系统">联系人查询添加系统</a>”。我有过用易语言的生成html网页经验，也知道图片在文本可以存储为ini、TXT。于是我搜索了大量易语言关于html的文章，直到看到了这篇文章“<a target="_blank" href="http://bbs.eyuyan.com/read.php?tid=385023" title="易语言窗口调用HTML编辑器">易语言窗口调用HTML编辑器</a>”我立马就有灵感了，我基于原来制作“恋爱表白网页生成器”的思路和这篇文章思路制作出了第一版本！如下图:<br><img src="../assets/loading.gif" data-src="../img/1/2020-0215-2151-51.jpg?x-oss-process=style/img"><br>第一版出来之后，只有生成文章页面。而且我并不满意“KindEditor”编辑器，太就没更新了还不支持markdown写做。于是乎我换成了“editor.md”期间遇到挺多问题的。因为易语言原版的控件不支持html5,editor.md根本就加载不出来，后面去“精益论坛”发现了“<a target="_blank" href="https://bbs.125.la/forum.php?mod=viewthread&amp;tid=14192959&amp;highlight=%D2%D7Web%E4%AF%C0%C0%C6%F7%D6%A7%B3%D6%BF%E2" title="精易Web浏览器支持库(miniblink内核)">精易Web浏览器支持库(miniblink内核)</a>”完美的解决了这个问题！期间感谢@<a target="_blank" href="https://bbs.125.la/forum.php?mod=viewthread&amp;tid=14344614&amp;extra=" title="大家好我是新手">大家好我是新手</a>在论坛上对我求助的答复！</p>
+<h2 id="h2-u8FC7u7A0B"><a name="过程" class="reference-link"></a><span class="header-link octicon octicon-link"></span>过程</h2><p>期间添加了文章分类功能，一件上传到FTP功能，实现文章路由（<code>i+1</code>）。完善博客首页列表，整站刷新功能（修改标题了或者主题css什么的 批量修改吧）。<br><img src="../assets/loading.gif" data-src="../img/1/2020-0215-2204-55.jpg?x-oss-process=style/img"></p>
+<blockquote>
+<p>静态博客1.1测试版本,如下图：</p>
+</blockquote>
+<p><img src="../assets/loading.gif" data-src="../img/1/2020-0215-2211-58.jpg?x-oss-process=style/img"></p>
+<h2 id="h2-u653Eu5F03"><a name="放弃" class="reference-link"></a><span class="header-link octicon octicon-link"></span>放弃</h2><p>在基本完善后，我在测试中发现了大量bug。而且有太多不满意，主题都是写死的。不能更换主题，而且分类功能上传ftp功能很鸡肋。文章生成html后时不时乱码，或者生成后空白。<br>于是我又从新开始构思了，解决这些问题。我又又又搞出了概念版本，如下图：<br><img src="../assets/loading.gif" data-src="../img/1/2020-0215-2222-08.jpg?x-oss-process=style/img"><br>概念版解决了，主题不能更换问题。取消了分类功能，上传ftp功能。</p>
+<p>2019.5.18更新：公安备案到现在一直没有消息都快一个月了~哎哎 我今天又想吧这个静态博客重新写了 因为感觉有些地方不好用啊 坑啊</p>
+<p>2019.5.21更新：公安备案终于备案好了，结果静态博客生成器还在搞，等下就上班了没时间了 啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+<p>2019.6.11更新：终于结束了长达一个月的夜班。现在转班了晚上睡觉还是很不习惯，经常失眠。博客现在也是很少折腾了，应该说是没时间折腾了，等我恢复了精神在折腾</p>
+<p>后来无期限的搁置了，下面图片是制作静态博客生成器4月/5月时候拍的:</p>
+<div class="tp"><br><div><img src="../assets/loading.gif" data-src="../img/1/2020-0215-2230-41.jpg?x-oss-process=style/img"></div><br><div><img src="../assets/loading.gif" data-src="../img/1/2020-0217-2059-34.jpg?x-oss-process=style/img"></div><br></div>
+
+<h2 id="h2-u91CDu542F"><a name="重启" class="reference-link"></a><span class="header-link octicon octicon-link"></span>重启</h2><p>2020年注定不是平凡的一年,肺炎的传播速度之快是谁都没有想到的。我从一开始关注确诊人数100多人到现在的4w多人，村里县城也开始封路，叫我们不要出门。出门要带口罩出门买菜需要通行证，于是乎我宅在看到了一篇<code>熊猫小A</code>发布的文章“<a target="_blank" href="https://blog.imalan.cn/archives/blog-now-powered-by-maverick/comment-page-3#comments" title="完全使用 GitHub 写博客">完全使用 GitHub 写博客</a>”。他根据他的需求用Python打造出了自己的静态博客生成器<code>Maverick</code>让我又重新拾起打造属于自己的静态博客了!“任何认真对待博客的人都应该自己写博客系统”这段话也是从他博客<a target="_blank" href="https://blog.imalan.cn/archives/blog-now-powered-by-maverick/comment-page-3#comments" title="文章">文章</a>引用的~</p>
+<h2 id="h2-u7EE7u7EED"><a name="继续" class="reference-link"></a><span class="header-link octicon octicon-link"></span>继续</h2><p>我从微云下载了备份后，继续折腾起了这个静态博客生成器。也遇到很多不懂的问题都去论坛请教了，也给自己设置了需求~！(^o^)/~<br><img src="../assets/loading.gif" data-src="../img/1/2020-0216-2218-26.jpg?x-oss-process=style/img"></p>
+<p>生成文章空白：原来困扰我很久的生成html时空白的原因，是因为易语言本身支持的是<code>gbk-32</code>，取编辑框内容值时网页编码格式是<code>UTF-8</code>，这样才导致生成时候有的内容空白。于是乎我用到了<code>精易模块</code>的<code>编码_gb2312到utf8()</code>，成功解决了这个问题</p>
+<p>整站刷新：我在第一版本的时候这个功能一直不完善，后面我用<code>计次循环首 ()</code>也解决了这个问题，就是批量重新生成一次html页面，修改了网站标题，或者修改css文件后，可以批量更新了。</p>
+<p>主题功能：第一版的主题是写死的，都是写在<code>编辑框1.内容</code>里面，后面突发奇想我用<code>子文本替换</code>实现了<code>模板标签</code>实现类似渲染的功能。<code>编辑框1.内容</code>读取文件夹下的<code>theme.txt</code>这样我主题就能直接编辑txt修改了。如图：<br><img src="../assets/loading.gif" data-src="../img/1/2020-0216-2210-17.jpg?x-oss-process=style/img"></p>
+<p>文章图片插入：图片的存放一直是我顾虑的，微博图床取消外链后我很多图片都没有了。后面我想干脆保存到本地，也不要上传到七牛什么的麻烦。于是我设置了每篇文章插入图片时，都会在<code>\img</code>创建跟文章id一样的文件夹名存放图片。也方便以后查看文章图片，图片名都是取插入的时间命名。例如写这篇文章插入的图片：<code>![](../img/1/2020-0216-2210-17.jpg?x-oss-process=style/img)</code></p>
+<p>首页分页、站内搜索、RSS/Atom订阅、文章灯箱、评论系统：</p>
+<p>首页分页：分页功能是我最纠结的，如果用易语言写分页我感觉会很麻烦，而且我也没有思路。于是我采用了js实现前端分页，原来使用过。具体参考了文章“<a target="_blank" href="https://www.cnblogs.com/websmile/p/8310014.html" title="使用javascript 实现静态网页分页效果">使用javascript 实现静态网页分页效果</a>”简单使用，静态页面也不需要考虑数据多了加载慢等问题</p>
+<p>站内搜索：博客搜索功能，我一开始是一点思路都没有。于是我百度搜索”hexo静态博客站内搜索”，得到的结果都是“Swiftype”and“next”插件，还有的就是手动建立json生成数据存放。以上的方案我都看不懂，于是我又去github搜索，终于给我发现了非常符合我要求的“<a target="_blank" href="https://github.com/jacksongblack/jquery-search-site" title="静态页面页面全站搜索jquery插件">静态页面页面全站搜索jquery插件</a>”作者很贴心的给出案例还有描述,基本适用于任何静态博客生成器。如下格式，具体点击链接查看!我根据案例在根目录生成<code>search.xml</code>文件存储全部文章，用于搜索！不管也有不足之处，不支持大小写混合搜索，我也发邮件请教原作者不过目前没有收到答复。</p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+ &lt;blogs&gt;
+ &lt;blog&gt;
+   &lt;title&gt;这篇文章标题&lt;/title&gt;
+   &lt;content&gt;这篇文章的内容&lt;/content&gt;
+   &lt;url&gt;http://wwww.site_url.com/xxxx.html&lt;/url&gt;
+   &lt;time&gt;2014-2-3&lt;/time&gt;
+ &lt;/blog&gt;
+  &lt;blog&gt;
+        &lt;title&gt;这篇文章标题&lt;/title&gt;
+        &lt;content&gt;这篇文章的内容&lt;/content&gt;
+        &lt;url&gt;http://wwww.site_url.com/xxxx.html&lt;/url&gt;
+        &lt;time&gt;2014-2-3&lt;/time&gt;
+      &lt;/blog&gt;
+ &lt;/blogs&gt;
+</code></pre>
+<p>RSS/Atom订阅：订阅功能是因为我看别人有，我也折腾了一个！这个实现并不困难，hexo、Jekyll都是自带生成的，于是我copy了<a target="_blank" href="https://blog.fooleap.org/" title="fooleap">fooleap</a>大哥<code>https://blog.fooleap.org/atom.xml</code>文件，基于里面的格式在根目录生成一个<code>atom.xml</code>文件搞定。<code>fooleap</code>大哥是在rss输出全部文章，我则设置了只生成最新的6篇文章！</p>
+<pre><code class="lang-xml">&lt;feed xmlns=&quot;http://www.w3.org/2005/Atom&quot;&gt;
+&lt;title&gt;Fooleap&#39;s Blog&lt;/title&gt; //网站标题
+&lt;link href=&quot;https://blog.fooleap.org/atom.xml&quot; rel=&quot;self&quot;/&gt;//订阅地址
+&lt;link href=&quot;https://blog.fooleap.org/&quot;/&gt;//网站地址
+&lt;updated&gt;2020-02-07T09:12:13+08:00&lt;/updated&gt;//最后更新时间 东八区
+&lt;id&gt;https://blog.fooleap.org&lt;/id&gt;//网站地址
+&lt;author&gt;
+&lt;name/&gt;//你的名字
+&lt;email/&gt;//邮箱
+&lt;/author&gt;
+&lt;entry&gt; //文章开始
+&lt;title&gt;Hello world!&lt;/title&gt;//文章标题
+&lt;link href=&quot;https://blog.fooleap.org/hello-world.html&quot;/&gt;//文章链接
+&lt;updated&gt;2011-02-09T00:00:00+08:00&lt;/updated&gt;//发布时间
+&lt;id&gt;hello-world&lt;/id&gt;//URL ID
+&lt;summary type=&quot;text&quot;&gt;这是 Fooleap 个人博客的第一篇日志，原博客未完善的文章将转移到此博客。&lt;/summary&gt; //文章内容
+&lt;/entry&gt;//文章结束
+&lt;/feed&gt;
+</code></pre>
+<p>文章灯箱：2020.3.1 更换为“FancyBox”灯箱。因为新主题不兼容原本的灯箱插件，无奈只好更换！感谢期间“<a target="_blank" href="http://blog.200011.net/" title="油油">油油</a>”的指导！FancyBox安装相关使用请参考文章“<a target="_blank" href="https://www.seogo.me/typecho/598.html" title="Typecho文章图片添加灯箱效果">Typecho文章图片添加灯箱效果</a>”.</p>
+<p><del>我采用了浅成大大的“<a target="_blank" href="https://github.com/Tokinx/ViewImage" title="ViewImage">ViewImage</a>”灯箱插件。使用设置相当简单，我直接修改主题文件搞定~！也参考了Typecho主题 <code>Pink moe.js</code></del></p>
+<pre><code class="lang-javascript">&lt;script&gt;
+    jQuery(document).ready(function () {
+        jQuery.viewImage({
+            &#39;target&#39; : &#39;.view-image img&#39;, //需要使用ViewImage的图片
+            &#39;exclude&#39;: &#39;.exclude img&#39;,    //要排除的图片
+            &#39;delay&#39;  : 300                //延迟时间
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+<p>评论系统：采用了<code>valine无后端评论系统</code><del><code>HashOver评论系统</code></del>，静态博客评论也是挺麻烦的事情。多说关闭之后，很多人对于云评论表示很担心。我也是如此数据在自己手中，是比较放心的！最开始的选择有<code>fooleap大哥</code>的“<a target="_blank" href="https://github.com/fooleap/disqus-php-api" title="Disqus PHP API">Disqus PHP API</a>”(PS：具体点击链接查看详情不过多描述)and “畅言”and 基于github的“ISSO” and “valine”。</p>
+<ol>
+<li><p><code>fooleap大哥</code>的评论系统需要一台国外服务器做转发，因为disqus被强了不是吗!但是我国外的服务器ip被墙了只能放弃！</p>
+</li><li><p>畅言我用过几次，用户登陆不友好，还有广告！</p>
+</li><li><p>ISSO基于github提问系统，github加载速度慢放弃</p>
+</li><li><p>valine各方面来说都很不错，<code>熊猫小a</code>就是使用这种 。但是云服务器 怕了不知道靠不靠谱</p>
+</li></ol>
+<p><del>最终选择<code>HashOver</code>的原因是因为搭建简单，你只需上传就简单设置可使用，也支持无数据库存储（xml、json）格式。我阿里云学生机刚好可以排上用场。<code>HashOver</code>评论系统搭建和使用文章具体可以参考“<a target="_blank" href="https://www.jiangfei.net/jianzhan/1142.html" title="HashOver评论系统，弃坑畅言，致敬多说！">HashOver评论系统，弃坑畅言，致敬多说！</a>”</del></p>
+<p>2020.2.20：更换为”valine”评论，不得不说真香！“HashOver”邮件通知一直不行折腾了很久,也参考了文章“<a target="_blank" href="https://www.candura.us/posts/post-355/" title="解决Hashover无法发送邮件提醒问题">解决Hashover无法发送邮件提醒问题</a>”还是没搞定，无奈最终只能选择更换为“valine”了。<a target="_blank" href="https://valine.js.org/" title="valine">valine</a>搭建非常简单，看官网教程就行了！就是邮件通知，自带的不行。可以配合第三方邮件提醒加强，具体参考“<a target="_blank" href="https://github.com/zhaojun1998/Valine-Admin" title="一个Valine的拓展应用，增强了Valine的邮件通知">一个Valine的拓展应用，增强了Valine的邮件通知</a>”暂时不过多描述！</p>
+<ul>
+<li>待添加功能“网站地图”（看需求），“博客一件上传github and FTP”(暂时不需要,麻烦)</li><li>上下篇文章功能，有思路就是有点问题 到时候在看看吧</li><li>文章要添加视频插入</li></ul>
+<h2 id="h2-u5B8Cu6210"><a name="完成" class="reference-link"></a><span class="header-link octicon octicon-link"></span>完成</h2><p><img src="../assets/loading.gif" data-src="../img/1/2020-0217-0015-34.jpg?x-oss-process=style/img"></p>
+<p>经历以上种种，期间也是各种小问题，但我最终完成最终版本“Chronicle静态博客生成器 Ver:2.0”<br>为什么取名“Chronicle”呢？以为我感觉很国际范，其实我不会英语的然后看其他人都是xxx英文生成器！“Chronicle”有含义“编年史”借托希望记录属于我的历史。（ps：有道词典翻的）</p>
+<p><img src="../assets/loading.gif" data-src="../img/1/2020-0216-2304-56.jpg?x-oss-process=style/img"></p>
+<p>具体功能我会在写一篇文章介绍的。文章：“<a target="_blank" href="https://xiamuyourenzhang.cn/article/2.html" title="Chronicle静态博客生成器介绍">Chronicle静态博客生成器介绍</a>”</p>
+<h2 id="h2-u611Fu8C22"><a name="感谢" class="reference-link"></a><span class="header-link octicon octicon-link"></span>感谢</h2><p>精益论坛：@<a target="_blank" href="https://bbs.125.la/" title="精益论坛">精益论坛</a> <code>大家好我是新手</code> <code>mcscm</code> <code>大司命</code> <code>数据压缩</code> 对我提问帖的回答,和精益模块支持库使用</p>
+<p>Github：@<a target="_blank" href="https://github.com/jacksongblack" title="jacksongblack">jacksongblack</a> @<a target="_blank" href="https://github.com/Tokinx/" title="Tokinx">Tokinx</a> @<a target="_blank" href="https://github.com/smallyunet/" title="smallyunet">smallyunet</a> @<a target="_blank" href="https://github.com/worksmile" title="worksmile">worksmile</a> 开源项目使用</p>
+<p>易语言论坛：<code>chencong5025</code> 编辑器调用案例</p>
+<p>还有广大网友等：<a target="_blank" href="https://www.jiangfei.net/" title="疆飞">疆飞</a> 评论搭建参考 <a target="_blank" href="https://blog.fateso.com/616.html" title="Pink">Pink</a>主题灯箱参考 </p>
+<p>网站主题仿至：<a target="_blank" href="https://github.com/smallyunet/hexo-theme-yinwang" title="hexo-theme-yinwang">hexo-theme-yinwang</a> </p>
+<h2 id="h2-u603Bu7ED3"><a name="总结" class="reference-link"></a><span class="header-link octicon octicon-link"></span>总结</h2><p>首先感谢你们能看完这篇文章，对于我这写作都和标点符合使用都不会的人！我知道我用了大量的“我”“于是”“然后”“麻烦” 等小学生文笔 哈哈哈 再次感谢！再次感谢！再次感谢！（ps：写了我4小时..汗）</p>
+<p>这静态博客终于是完成了，期间遇到了很多问题我都是百度或者论坛求助解决的。很多都没描述清楚，因为不知道怎么描述只能简单概括了。过段时间整顿一下，把旧博文转移下，就准备启用这个静态博客生成器了。</p>
+<p>我的易语言可能连入门级别的都没有，我连简单的命令都要去论坛求助。整个静态博客生成器，用到的代码都是很常见的。例如：<code>写到文件</code> <code>读取配置</code>等，我不是大佬只是一个新手！整个博客只有思路是我的，代码啥的统统百度。</p>
+<p>下图就是其中一段代码：<br><img src="../assets/loading.gif" data-src="../img/1/2020-0216-2359-29.jpg?x-oss-process=style/img"></p>
+<p>小剧场：我写这篇文章的时候，不下心点了其他链接跳转了。文章写了1小时没保存只能重写了，气的我当天添加了个一分钟自动保存一次的“自动保存”功能 汗</p>
+<div class="tp"><br><div><br><img src="../assets/loading.gif" data-src="../img/1/2020-0216-2354-11.jpg?x-oss-process=style/img"><br></div><br><div><br><img src="../assets/loading.gif" data-src="../img/1/2020-0217-1713-51.jpg?x-oss-process=style/img"><br></div><br><div><br><img src="../assets/loading.gif" data-src="../img/1/2020-0216-2354-37.jpg?x-oss-process=style/img"><br></div><br></div>
+
+<h2 id="h2-u968Fu7F18u66F4u65B0"><a name="随缘更新" class="reference-link"></a><span class="header-link octicon octicon-link"></span>随缘更新</h2><p>2020.3.1 : 参考了“<a target="_blank" href="https://muguang.me/" title="暮光博客">暮光博客</a>”移植了typecho的fantasy主题。期间也是发现很多问题，顺带解决了。新主题分页采用了json ajax! 感觉逼格更高！参考了“<a target="_blank" href="https://github.com/2yunyun/loadmore" title="使用js实现加载更多内容，js分页">使用js实现加载更多内容，js分页</a>”</p>
+
+		  </div>
+        </article>
+        <section class="pager">
+		
+		
+		  
+		  </section>
+        <div class="comment-container">
+          <div id="comments" class="clearfix">
+            <span class="response">(*/ω＼*)评论区:</span>
+            <div class="comments" id="valine-comments"></div>
+		<script src="https://i.xiamuyourenzhang.cn/Valine.min.js" type="text/javascript"></script>
+		<script src="https://i.xiamuyourenzhang.cn/av-min.js"></script>
+		<script>
+			new Valine({
+				av: AV,
+				el: '#valine-comments',
+				lang: 'zh-cn' || 'zh-cn',
+				admin_email: '6@9i3.cn',
+				emoticon_url: 'https://xiamuyourenzhang.cn/alu',
+				emoticon_list: ["吐.png","喷血.png","狂汗.png","不说话.png","汗.png","坐等.png","献花.png","不高兴.png","中刀.png","害羞.png","皱眉.png","小眼睛.png","中指.png","尴尬.png","瞅你.png","想一想.png","中枪.png","得意.png","肿包.png","扇耳光.png","亲亲.png","惊喜.png","脸红.png","无所谓.png","便便.png","愤怒.png","蜡烛.png","献黄瓜.png","内伤.png","投降.png","观察.png","看不见.png","击掌.png","抠鼻.png","邪恶.png","看热闹.png","口水.png","抽烟.png","锁眉.png","装大款.png","吐舌.png","无奈.png","长草.png","赞一个.png","呲牙.png","无语.png","阴暗.png","不出所料.png","咽气.png","期待.png","高兴.png","吐血倒地.png","哭泣.png","欢呼.png","黑线.png","喜极而泣.png","喷水.png","深思.png","鼓掌.png","暗地观察.png"],
+				app_id: 'EO29uphWFNAI1y6rt7IMPk4X-gzGzoHsz',
+				app_key: 'MNpLsezYvd8eMNKJbcel6HyL',
+				placeholder: "撰写评论"
+			});
+			if (window.location.hash) {
+				var checkExist = setInterval(function() {
+					if ($(window.location.hash).length) {
+						$('html, body').animate({
+							scrollTop: $(window.location.hash).offset().top - 90
+						},
+						1000);
+						clearInterval(checkExist);
+					}
+				},
+				100);
+			}			
+		</script>
+		      <link rel="stylesheet" href="../assets/css/pl.css">	
+            </div>
+          </div>		  
+      </main>
+    </div>		
+    <footer>
+      <span>&copy; 2020 <a href="http://199607.xyz/sitemap.html" target="_blank">夏目友人帐</a></span>
+      <span>&hearts; Theme By
+        <a href="https://www.xde.io/" target="_blank">Xingr</a></span>
+      <div class="powered_by">
+        <span>Powered by</span>
+        <a href="https://xiamuyourenzhang.cn/article/2.html" target="_blank">Chronicle 静态博客生成器</a></div>
+      <span>闽ICP备14002885号-6</span>&amp;
+      <a href="http://www.beian.miit.gov.cn/" target="_blank">闽公网安备35042602000063</a>
+      <div class="footer_slogan"></div>
+    </footer>
+    <link rel="stylesheet" href="https://i.xiamuyourenzhang.cn/fantasyfonts.css">	
+    <!-- <script src="https://cdn.staticfile.org/highlight.js/9.13.1/highlight.min.js"></script> -->
+    <!-- <script>hljs.initHighlightingOnLoad();</script> -->
+    <style type="text/css">a.back_to_top{text-decoration:none;position:fixed;bottom:40px;right:30px;background:#f0f0f0;height:40px;width:40px;border-radius:50%;line-height:36px;font-size:18px;text-align:center;transition-duration:.5s;transition-propety:background-color;display:none}a.back_to_top span{color:#888}a.back_to_top:hover{cursor:pointer;background:#dfdfdf}a.back_to_top:hover span{color:#555}@media print,screen and (max-width:580px){.back_to_top{display:none!important}}</style>
+    <a id="back_to_top" href="#" class="back_to_top">
+      <span>△</span></a>
+	<script src="../assets/js/prism.js" type="application/javascript"></script>		   
+   <script>$(document).ready((function(_this) {
+        return function() {
+          var bt;
+          bt = $('#back_to_top');
+          if ($(document).width() > 480) {
+            $(window).scroll(function() {
+              var st;
+              st = $(window).scrollTop();
+              if (st > 30) {
+                return bt.css('display', 'block')
+              } else {
+                return bt.css('display', 'none')
+              }
+            });
+            return bt.click(function() {
+              $('body,html').animate({
+                scrollTop: 0
+              },
+              800);
+              return false
+            })
+          }
+        }
+      })(this));
+      $(function() {
+        $('a[href*=#]:not([href=#])').click(function() {
+          if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+            var target = $(this.hash);
+            target = target.length ? target: $('[name=' + this.hash.slice(1) + ']');
+            if (target.length) {
+              $('html,body').animate({
+                scrollTop: target.offset().top
+              },
+              500);
+              return false
+            }
+          }
+        })
+      });
+	</script>  
+	<script src="../assets/js/img.js" type="text/javascript"></script>
+	<script type="module" src="https://i.xiamuyourenzhang.cn/instantpage.js"></script>	
+  </body>
+
+</html>
